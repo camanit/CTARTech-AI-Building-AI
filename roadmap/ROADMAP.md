@@ -19,9 +19,9 @@
 
 ## Fase 3: Pengelolaan Project
 
-- [ ] Menambahkan perintah `python command.py run`
-- [ ] Menambahkan perintah `python command.py validate`
-- [ ] Menambahkan perintah `python command.py status`
+- [x] Menambahkan perintah `python command.py run`
+- [x] Menambahkan perintah `python command.py validate`
+- [x] Menambahkan perintah `python command.py status`
 - [ ] Menyimpan log setiap eksekusi agent
 - [ ] Menambahkan mekanisme persetujuan sebelum perubahan diterapkan
 

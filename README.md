@@ -36,7 +36,7 @@ Untuk melihat roadmap:
 python command.py roadmap
 ```
 
-Perintah `init` dan `roadmap` sudah tersedia. Perintah `run`, `validate`, dan `status` merupakan bagian dari pengembangan CLI berikutnya.
+Perintah `init`, `roadmap`, `run`, `validate`, dan `status` sudah tersedia.
 
 ### Contoh Roadmap AI-Building-AI
 
