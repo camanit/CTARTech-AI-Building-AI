@@ -13,9 +13,9 @@
 - [x] Membaca semua task dari `ROADMAP.md`
 - [x] Memilih task pertama yang belum selesai
 - [x] Mengirim task ke connector LLM
-- [ ] Menjalankan validator setelah kode dibuat
-- [ ] Menjalankan test aplikasi di sandbox
-- [ ] Mengubah status task menjadi `[x]` setelah berhasil
+- [x] Menjalankan validator setelah kode dibuat
+- [x] Menjalankan test aplikasi di sandbox
+- [x] Mengubah status task menjadi `[x]` setelah berhasil
 
 ## Fase 3: Pengelolaan Project
 

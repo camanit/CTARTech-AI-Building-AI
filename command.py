@@ -82,6 +82,13 @@ def execute_roadmap():
             cwd=PROJECT_ROOT,
             check=True,
         )
+        tests_dir = PROJECT_ROOT / "tests"
+        if tests_dir.exists() and any(tests_dir.rglob("test_*.py")):
+            subprocess.run(
+                [sys.executable, "-m", "unittest", "discover", "-s", str(tests_dir)],
+                cwd=PROJECT_ROOT,
+                check=True,
+            )
     except subprocess.CalledProcessError:
         print("Task gagal. Status roadmap tidak diubah.")
         return 1

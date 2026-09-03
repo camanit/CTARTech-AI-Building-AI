@@ -36,13 +36,13 @@ def build_prompt(task):
 def request_gemini(task, api_key, model, timeout):
     endpoint = (
         "https://generativelanguage.googleapis.com/v1beta/models/"
-        f"{model}:generateContent?key={api_key}"
+        f"{model}:generateContent"
     )
     payload = {"contents": [{"parts": [{"text": build_prompt(task)}]}]}
     request = Request(
         endpoint,
         data=json.dumps(payload).encode("utf-8"),
-        headers={"Content-Type": "application/json"},
+        headers={"Content-Type": "application/json", "x-goog-api-key": api_key},
         method="POST",
     )
     try:

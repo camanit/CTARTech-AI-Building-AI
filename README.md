@@ -117,12 +117,12 @@ Yang sudah berjalan otomatis:
 - `command.py run` membaca task pertama dengan status `[ ]`.
 - Connector mengirim task ke Gemini dan mem-parsing kode hasilnya.
 - Kode divalidasi sebelum ditulis ke `app/`.
+- Test yang tersedia di `tests/` dijalankan sebelum task diselesaikan.
 - Task berubah menjadi `[x]` setelah validasi berhasil.
 - `command.py evaluate` membuat report dan proposal perbaikan.
 
 Yang belum berjalan otomatis:
 
-- Test aplikasi belum dijalankan oleh executor.
 - Satu kali `run` baru mengerjakan satu task.
 - Agent belum mengubah dirinya sendiri tanpa approval.
 - Commit, pull request, rollback, dan sandbox terisolasi belum tersedia.
