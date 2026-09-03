@@ -1,6 +1,6 @@
 import os
 import sys
-import openai # Contoh menggunakan client API standar
+from pathlib import Path
 
 def dispatch_coding_task(prompt_instruction: str):
     api_key = os.getenv("LLM_API_KEY")
@@ -20,7 +20,7 @@ def enterprise_feature_module():
     return True
 """
     
-    target_file = "sandbox_agent_core.py"
+    target_file = Path(__file__).resolve().parent / "sandbox_agent_core.py"
     with open(target_file, "w", encoding="utf-8") as f:
         f.write(generated_code)
         

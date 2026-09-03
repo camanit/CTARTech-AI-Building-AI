@@ -1,9 +1,13 @@
 import os
 import sys
 import subprocess
+from pathlib import Path
+
+
+TARGET_FILE = Path(__file__).resolve().parent / "sandbox_agent_core.py"
 
 def validate_generated_code():
-    target_file = "sandbox_agent_core.py"
+    target_file = TARGET_FILE
     
     if not os.path.exists(target_file):
         print(f"Validation Error: {target_file} not found. Run generator first!")

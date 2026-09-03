@@ -1,9 +1,13 @@
 import os
 import sys
+from pathlib import Path
+
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 def load_agent_rules():
-    rule_file = "AGENT_CODING_RULES.md"
-    if not os.path.exists(rule_file):
+    rule_file = PROJECT_ROOT / "AGENT_CODING_RULES.md"
+    if not rule_file.exists():
         print(f"Error: {rule_file} not found!")
         sys.exit(1)
     
@@ -29,7 +33,7 @@ if __name__ == "__main__":
     execute_agent_task()
 '''
     
-    output_filename = "sandbox_agent_core.py"
+    output_filename = Path(__file__).resolve().parent / "sandbox_agent_core.py"
     with open(output_filename, "w", encoding="utf-8") as f:
         f.write(agent_core_code)
         

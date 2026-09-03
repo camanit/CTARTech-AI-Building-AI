@@ -65,7 +65,7 @@ Pada eksekusi roadmap penuh, AI akan mengambil task pertama yang belum selesai, 
 Pipeline saat ini dapat dijalankan dengan:
 
 ```bash
-python runner_loop.py
+python agent/runner_loop.py
 ```
 
 Pipeline menjalankan connector, memvalidasi hasil kode, lalu mengeksekusi sandbox. Connector saat ini masih berupa simulasi lokal; integrasi provider LLM memerlukan `LLM_API_KEY` dan implementasi request ke provider yang dipilih.

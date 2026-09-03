@@ -1,5 +1,9 @@
 import subprocess
 import sys
+from pathlib import Path
+
+
+AGENT_DIR = Path(__file__).resolve().parent
 
 def run_agent_pipeline():
     max_retries = 5
@@ -9,13 +13,13 @@ def run_agent_pipeline():
         
         try:
             print("Menjalankan konektor agen...")
-            subprocess.run([sys.executable, "agent_connector.py"], check=True)
+            subprocess.run([sys.executable, str(AGENT_DIR / "agent_connector.py")], check=True)
 
             print("Menjalankan validator...")
-            subprocess.run([sys.executable, "agent_validator.py"], check=True)
+            subprocess.run([sys.executable, str(AGENT_DIR / "agent_validator.py")], check=True)
 
             print("Menjalankan sandbox...")
-            subprocess.run([sys.executable, "sandbox_agent_core.py"], check=True)
+            subprocess.run([sys.executable, str(AGENT_DIR / "sandbox_agent_core.py")], check=True)
 
             print("✅ Siklus agen berhasil diselesaikan!")
             return True
