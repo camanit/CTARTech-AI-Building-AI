@@ -1,37 +1,34 @@
-import time
 import subprocess
+import sys
 
 def run_agent_pipeline():
     max_retries = 5
-    attempt = 1
 
-    while attempt <= max_retries:
+    for attempt in range(1, max_retries + 1):
         print(f"\n--- Memulai Siklus Agen Percobaan Ke-{attempt} ---")
         
         try:
-            # 1. Jalankan generator untuk merakit/memperbarui kode
-            print("Menjalankan generator...")
-            subprocess.run(["python", "agent_generator.py"], check=True)
-
-            # 2. Jalankan validator untuk uji sintaks
-            print("Menjalankan validator...")
-            subprocess.run(["python", "agent_validator.py"], check=True)
-
-            # 3. Jalankan konektor LLM
             print("Menjalankan konektor agen...")
-            subprocess.run(["python", "agent_connector.py"], check=True)
+            subprocess.run([sys.executable, "agent_connector.py"], check=True)
+
+            print("Menjalankan validator...")
+            subprocess.run([sys.executable, "agent_validator.py"], check=True)
+
+            print("Menjalankan sandbox...")
+            subprocess.run([sys.executable, "sandbox_agent_core.py"], check=True)
 
             print("✅ Siklus agen berhasil diselesaikan!")
-            break # Berhenti dari loop jika sukses
+            return True
 
         except subprocess.CalledProcessError as e:
             print(f"⚠️ Terdeteksi gangguan pada percobaan ke-{attempt}: {e}")
-            print("Mencoba melakukan perbaikan otomatis dan uji coba ulang dalam 5 detik...")
-            time.sleep(5)
-            attempt += 1
+            if attempt < max_retries:
+                print("Mencoba ulang...")
         except Exception as ex:
             print(f"❌ Error tidak terduga: {ex}")
-            break
+            return False
+
+    return False
 
 if __name__ == "__main__":
     run_agent_pipeline()
