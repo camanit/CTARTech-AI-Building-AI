@@ -11,7 +11,7 @@
 ## Fase 2: Eksekusi Roadmap
 
 - [x] Membaca semua task dari `ROADMAP.md`
-- [ ] Memilih task pertama yang belum selesai
+- [x] Memilih task pertama yang belum selesai
 - [ ] Mengirim task ke connector LLM
 - [ ] Menjalankan validator setelah kode dibuat
 - [ ] Menjalankan test aplikasi di sandbox
@@ -28,7 +28,7 @@
 
 ## Fase 4: Integrasi dan Keamanan
 
-- [ ] Menghubungkan connector ke provider LLM nyata
+- [x] Menghubungkan connector ke provider LLM nyata
 - [ ] Menambahkan isolasi sandbox yang lebih kuat
 - [ ] Menambahkan integrasi commit dan pull request GitHub
 - [ ] Menambahkan pemeriksaan secret dan perubahan berisiko

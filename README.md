@@ -79,6 +79,18 @@ python command.py run
 
 Pipeline menjalankan connector, memvalidasi hasil kode, lalu mengeksekusi sandbox. `command.py` menjadi pintu masuk utama dan meneruskan perintah ke pipeline di folder `agent/`.
 
+### Konfigurasi Gemini
+
+Connector sudah menyediakan pemanggilan Gemini API. Pengguna cukup mengatur API key di environment:
+
+```bash
+export LLM_API_KEY="GEMINI_API_KEY_ANDA"
+export GEMINI_MODEL="gemini-2.5-flash"
+python command.py run
+```
+
+`GEMINI_MODEL` dan `GEMINI_TIMEOUT` bersifat opsional. Default model adalah `gemini-2.5-flash` dan default timeout adalah 60 detik. API key tidak boleh ditulis di source code atau di-commit ke GitHub.
+
 ### Status Otomatisasi Saat Ini
 
 Yang sudah berjalan otomatis:
@@ -97,6 +109,7 @@ Yang belum berjalan otomatis:
 - `command.py run` baru mengerjakan satu task setiap kali dijalankan.
 - Test aplikasi khusus di folder `tests/` belum dijalankan oleh executor.
 - Evaluator belum menggunakan model LLM untuk analisis semantik.
-- Connector masih berupa simulasi lokal, bukan request ke provider LLM nyata.
+- Mode `LLM_API_KEY=test` tersedia untuk pengujian lokal tanpa request ke Gemini.
+- Dengan API key selain `test`, connector mengirim request ke Gemini API.
 
-Dengan demikian, sistem saat ini sudah memiliki executor roadmap prototype. Tahap berikutnya adalah menghubungkan provider LLM nyata, generator, test aplikasi, dan loop otomatis untuk melanjutkan semua task.
+Dengan demikian, sistem saat ini sudah memiliki executor roadmap prototype dan connector Gemini. Tahap berikutnya adalah menghubungkan generator, test aplikasi, approval, dan loop otomatis untuk melanjutkan semua task.
