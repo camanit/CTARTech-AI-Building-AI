@@ -38,6 +38,61 @@ def show_roadmap():
     return 0
 
 
+def get_next_task():
+    if not ROADMAP_FILE.exists():
+        return None
+
+    for line in ROADMAP_FILE.read_text(encoding="utf-8").splitlines():
+        match = re.match(r"^- \[ \] (.+)$", line)
+        if match:
+            return match.group(1)
+    return None
+
+
+def mark_task_completed(task):
+    roadmap = ROADMAP_FILE.read_text(encoding="utf-8")
+    pending_line = f"- [ ] {task}"
+    completed_line = f"- [x] {task}"
+    if pending_line not in roadmap:
+        return False
+
+    ROADMAP_FILE.write_text(roadmap.replace(pending_line, completed_line, 1), encoding="utf-8")
+    return True
+
+
+def execute_roadmap():
+    task = get_next_task()
+    if task is None:
+        print("Tidak ada task roadmap yang masih terbuka.")
+        return 0
+
+    output_file = PROJECT_ROOT / "app" / "generated_feature.py"
+    connector_file = AGENT_DIR / "agent_connector.py"
+    validator_file = AGENT_DIR / "agent_validator.py"
+    print(f"Menjalankan task: {task}")
+
+    try:
+        subprocess.run(
+            [sys.executable, str(connector_file), "--task", task, "--output", str(output_file)],
+            cwd=PROJECT_ROOT,
+            check=True,
+        )
+        subprocess.run(
+            [sys.executable, str(validator_file), "--target", str(output_file)],
+            cwd=PROJECT_ROOT,
+            check=True,
+        )
+    except subprocess.CalledProcessError:
+        print("Task gagal. Status roadmap tidak diubah.")
+        return 1
+
+    if mark_task_completed(task):
+        print(f"Task selesai: {task}")
+        return 0
+    print("Task tervalidasi, tetapi status roadmap gagal diperbarui.")
+    return 1
+
+
 def run_agent():
     runner_file = AGENT_DIR / "runner_loop.py"
     return subprocess.run([sys.executable, str(runner_file)], cwd=PROJECT_ROOT).returncode
@@ -74,7 +129,7 @@ def main():
     if arguments.command == "roadmap":
         return show_roadmap()
     if arguments.command == "run":
-        return run_agent()
+        return execute_roadmap()
     if arguments.command == "validate":
         return validate_agent()
     return show_status()

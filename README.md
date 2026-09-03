@@ -58,7 +58,7 @@ Perintah `init`, `roadmap`, `run`, `validate`, dan `status` sudah tersedia.
 - [ ] Memperbarui status task
 ```
 
-Pada eksekusi roadmap penuh, AI akan mengambil task pertama yang belum selesai, membuat perubahan kode, menjalankan validator dan test, kemudian mengubah status task menjadi `[x]` hanya jika pemeriksaan berhasil. Jika terjadi error, proses berhenti atau mencoba ulang sesuai konfigurasi dan melaporkan error untuk ditinjau.
+Pada eksekusi roadmap, AI mengambil task pertama yang belum selesai, membuat perubahan kode, menjalankan validator, kemudian mengubah status task menjadi `[x]` hanya jika pemeriksaan berhasil. Jika terjadi error, status task tidak diubah dan error dilaporkan untuk ditinjau.
 
 ### Pipeline Agent
 
@@ -77,14 +77,16 @@ Yang sudah berjalan otomatis:
 
 - `runner_loop.py` menjalankan connector, validator, dan sandbox secara berurutan.
 - Runner memiliki mekanisme retry jika salah satu proses gagal.
-- `command.py` menyediakan perintah `run`, `validate`, dan `status`.
+- `command.py run` membaca task pertama yang belum selesai.
+- Hasil prototype ditulis ke `app/generated_feature.py`.
+- Task ditandai selesai setelah validasi berhasil.
+- `command.py` menyediakan perintah `validate` dan `status`.
 
 Yang belum berjalan otomatis:
 
 - `agent_generator.py` belum dipanggil oleh runner.
-- Roadmap belum dibaca untuk memilih task berikutnya.
-- Kode hasil agent belum diarahkan untuk membangun fitur di folder `app/`.
-- Status task roadmap belum diubah otomatis dari `[ ]` menjadi `[x]`.
+- `command.py run` baru mengerjakan satu task setiap kali dijalankan.
+- Test aplikasi khusus di folder `tests/` belum dijalankan oleh executor.
 - Connector masih berupa simulasi lokal, bukan request ke provider LLM nyata.
 
-Dengan demikian, sistem saat ini adalah pipeline agent dasar yang sudah dapat dieksekusi, bukan executor roadmap penuh. Tahap berikutnya adalah menghubungkan pembacaan roadmap, pembuatan kode di `app/`, pengujian, dan pembaruan status task.
+Dengan demikian, sistem saat ini sudah memiliki executor roadmap prototype. Tahap berikutnya adalah menghubungkan provider LLM nyata, generator, test aplikasi, dan loop otomatis untuk melanjutkan semua task.

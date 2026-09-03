@@ -2,12 +2,12 @@ import os
 import sys
 import subprocess
 from pathlib import Path
+import argparse
 
 
 TARGET_FILE = Path(__file__).resolve().parent / "sandbox_agent_core.py"
 
-def validate_generated_code():
-    target_file = TARGET_FILE
+def validate_generated_code(target_file=TARGET_FILE):
     
     if not os.path.exists(target_file):
         print(f"Validation Error: {target_file} not found. Run generator first!")
@@ -26,4 +26,7 @@ def validate_generated_code():
         sys.exit(1)
 
 if __name__ == "__main__":
-    validate_generated_code()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--target", type=Path, default=TARGET_FILE)
+    arguments = parser.parse_args()
+    validate_generated_code(arguments.target)

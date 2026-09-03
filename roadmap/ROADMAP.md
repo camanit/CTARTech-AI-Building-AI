@@ -10,7 +10,7 @@
 
 ## Fase 2: Eksekusi Roadmap
 
-- [ ] Membaca semua task dari `ROADMAP.md`
+- [x] Membaca semua task dari `ROADMAP.md`
 - [ ] Memilih task pertama yang belum selesai
 - [ ] Mengirim task ke connector LLM
 - [ ] Menjalankan validator setelah kode dibuat
