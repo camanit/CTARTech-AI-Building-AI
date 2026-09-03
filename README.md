@@ -62,10 +62,29 @@ Pada eksekusi roadmap penuh, AI akan mengambil task pertama yang belum selesai, 
 
 ### Pipeline Agent
 
-Pipeline saat ini dapat dijalankan dengan:
+Pipeline dasar saat ini dapat dijalankan dengan:
 
 ```bash
 python agent/runner_loop.py
+python command.py run
 ```
 
-Pipeline menjalankan connector, memvalidasi hasil kode, lalu mengeksekusi sandbox. Connector saat ini masih berupa simulasi lokal; integrasi provider LLM memerlukan `LLM_API_KEY` dan implementasi request ke provider yang dipilih.
+Pipeline menjalankan connector, memvalidasi hasil kode, lalu mengeksekusi sandbox. `command.py` menjadi pintu masuk utama dan meneruskan perintah ke pipeline di folder `agent/`.
+
+### Status Otomatisasi Saat Ini
+
+Yang sudah berjalan otomatis:
+
+- `runner_loop.py` menjalankan connector, validator, dan sandbox secara berurutan.
+- Runner memiliki mekanisme retry jika salah satu proses gagal.
+- `command.py` menyediakan perintah `run`, `validate`, dan `status`.
+
+Yang belum berjalan otomatis:
+
+- `agent_generator.py` belum dipanggil oleh runner.
+- Roadmap belum dibaca untuk memilih task berikutnya.
+- Kode hasil agent belum diarahkan untuk membangun fitur di folder `app/`.
+- Status task roadmap belum diubah otomatis dari `[ ]` menjadi `[x]`.
+- Connector masih berupa simulasi lokal, bukan request ke provider LLM nyata.
+
+Dengan demikian, sistem saat ini adalah pipeline agent dasar yang sudah dapat dieksekusi, bukan executor roadmap penuh. Tahap berikutnya adalah menghubungkan pembacaan roadmap, pembuatan kode di `app/`, pengujian, dan pembaruan status task.
