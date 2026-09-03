@@ -103,6 +103,11 @@ def validate_agent():
     return subprocess.run([sys.executable, str(validator_file)], cwd=PROJECT_ROOT).returncode
 
 
+def evaluate_agent():
+    evaluator_file = PROJECT_ROOT / "app" / "ai_evaluator.py"
+    return subprocess.run([sys.executable, str(evaluator_file)], cwd=PROJECT_ROOT).returncode
+
+
 def show_status():
     if not ROADMAP_FILE.exists():
         print("Roadmap belum ada. Jalankan: python command.py init")
@@ -120,7 +125,7 @@ def main():
     parser = argparse.ArgumentParser(description="CLI untuk menjalankan roadmap agent")
     parser.add_argument(
         "command",
-        choices=("init", "roadmap", "run", "validate", "status"),
+        choices=("init", "roadmap", "run", "validate", "evaluate", "status"),
     )
     arguments = parser.parse_args()
 
@@ -132,6 +137,8 @@ def main():
         return execute_roadmap()
     if arguments.command == "validate":
         return validate_agent()
+    if arguments.command == "evaluate":
+        return evaluate_agent()
     return show_status()
 
 

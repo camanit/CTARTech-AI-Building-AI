@@ -36,7 +36,15 @@ Untuk melihat roadmap:
 python command.py roadmap
 ```
 
-Perintah `init`, `roadmap`, `run`, `validate`, dan `status` sudah tersedia.
+Perintah `init`, `roadmap`, `run`, `validate`, `evaluate`, dan `status` sudah tersedia.
+
+Untuk mengevaluasi struktur agent dan membuat proposal perbaikan:
+
+```bash
+python command.py evaluate
+```
+
+Evaluator menulis `app/evaluation_report.md` dan `app/improvement_proposal.md`. Evaluator hanya menganalisis file dan membuat proposal; ia tidak mengubah folder `agent/` secara otomatis.
 
 ### Contoh Roadmap AI-Building-AI
 
@@ -81,12 +89,14 @@ Yang sudah berjalan otomatis:
 - Hasil prototype ditulis ke `app/generated_feature.py`.
 - Task ditandai selesai setelah validasi berhasil.
 - `command.py` menyediakan perintah `validate` dan `status`.
+- `command.py evaluate` membuat laporan dan proposal perbaikan agent.
 
 Yang belum berjalan otomatis:
 
 - `agent_generator.py` belum dipanggil oleh runner.
 - `command.py run` baru mengerjakan satu task setiap kali dijalankan.
 - Test aplikasi khusus di folder `tests/` belum dijalankan oleh executor.
+- Evaluator belum menggunakan model LLM untuk analisis semantik.
 - Connector masih berupa simulasi lokal, bukan request ke provider LLM nyata.
 
 Dengan demikian, sistem saat ini sudah memiliki executor roadmap prototype. Tahap berikutnya adalah menghubungkan provider LLM nyata, generator, test aplikasi, dan loop otomatis untuk melanjutkan semua task.

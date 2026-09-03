@@ -23,6 +23,7 @@
 - [x] Menambahkan perintah `python command.py validate`
 - [x] Menambahkan perintah `python command.py status`
 - [ ] Menyimpan log setiap eksekusi agent
+- [x] Membuat evaluator AI awal untuk menganalisis agent
 - [ ] Menambahkan mekanisme persetujuan sebelum perubahan diterapkan
 
 ## Fase 4: Integrasi dan Keamanan
