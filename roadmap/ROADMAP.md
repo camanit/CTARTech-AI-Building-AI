@@ -12,7 +12,7 @@
 
 - [x] Membaca semua task dari `ROADMAP.md`
 - [x] Memilih task pertama yang belum selesai
-- [ ] Mengirim task ke connector LLM
+- [x] Mengirim task ke connector LLM
 - [ ] Menjalankan validator setelah kode dibuat
 - [ ] Menjalankan test aplikasi di sandbox
 - [ ] Mengubah status task menjadi `[x]` setelah berhasil
@@ -29,6 +29,7 @@
 ## Fase 4: Integrasi dan Keamanan
 
 - [x] Menghubungkan connector ke provider LLM nyata
+- [x] Menambahkan rotasi API key saat quota tercapai
 - [ ] Menambahkan isolasi sandbox yang lebih kuat
 - [ ] Menambahkan integrasi commit dan pull request GitHub
 - [ ] Menambahkan pemeriksaan secret dan perubahan berisiko

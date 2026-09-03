@@ -91,6 +91,15 @@ python command.py run
 
 `GEMINI_MODEL` dan `GEMINI_TIMEOUT` bersifat opsional. Default model adalah `gemini-2.5-flash` dan default timeout adalah 60 detik. API key tidak boleh ditulis di source code atau di-commit ke GitHub.
 
+Untuk menggunakan beberapa API key dan berpindah otomatis ketika quota atau rate limit tercapai:
+
+```bash
+export LLM_API_KEYS="GEMINI_KEY_1,GEMINI_KEY_2,GEMINI_KEY_3"
+python command.py run
+```
+
+Connector mencoba key secara berurutan. `LLM_API_KEYS` diprioritaskan jika tersedia; jika tidak, connector menggunakan `LLM_API_KEY`. Nilai key tidak pernah dicetak ke log.
+
 ### Status Otomatisasi Saat Ini
 
 Yang sudah berjalan otomatis:
@@ -111,5 +120,6 @@ Yang belum berjalan otomatis:
 - Evaluator belum menggunakan model LLM untuk analisis semantik.
 - Mode `LLM_API_KEY=test` tersedia untuk pengujian lokal tanpa request ke Gemini.
 - Dengan API key selain `test`, connector mengirim request ke Gemini API.
+- Beberapa key dapat dikonfigurasi melalui `LLM_API_KEYS` untuk rotasi saat quota atau rate limit tercapai.
 
 Dengan demikian, sistem saat ini sudah memiliki executor roadmap prototype dan connector Gemini. Tahap berikutnya adalah menghubungkan generator, test aplikasi, approval, dan loop otomatis untuk melanjutkan semua task.
