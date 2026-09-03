@@ -130,3 +130,15 @@ Yang belum berjalan otomatis:
 Dengan demikian, sistem ini adalah executor roadmap prototype dengan connector Gemini. Pengembangan self-improvement tetap menggunakan evaluasi, review manusia, test, dan rollback.
 
 Jangan commit API key, file `.env`, atau secret apa pun ke repository.
+
+---
+
+## ☕ Dukung & Donasi Pengembang (Support Open Source)
+
+Jika Anda ingin mendukung keberlanjutan pengembangan **NantaraVM** (Hypervisor MicroVM Open-Source Karya Indonesia), Anda dapat memberikan apresiasi / donasi melalui:
+
+- 🏦 **Bank:** Allo Bank
+- 💳 **No. Rekening:** `081260006666`
+- 💬 **Konfirmasi / WA:** [+62 812-6000-6666](https://wa.me/6281260006666)
+
+*Dukungan Anda sangat berharga untuk biaya infrastruktur server pengujian, lisensi hardware AMD/Intel enclave, serta pengembangan fitur-fitur baru NantaraVM, NantaraPentest, NantaraBoot, NantaraBios, NantaraSupport, Dan Opensource Lainnya di #CTARTech.*
