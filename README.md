@@ -2,7 +2,18 @@
 Experimental workspace and meta-framework for self-improving AI coding agents and automated repository generation.
 
 ## Overview
-This repository serves as a secure, isolated sandbox to design, test, and validate multi-provider LLM coding agents, workflow pipelines, and automated patch architectures before deploying them to production systems.
+Prototype open source untuk membangun dan mengevaluasi coding agent berbasis LLM. Agent membaca roadmap, meminta kode dari Gemini, memvalidasi hasilnya, lalu menyimpannya ke folder `app/`.
+
+## Struktur Project
+
+```text
+AI-Building-AI/
+├── agent/                 # Komponen agent dan connector Gemini
+├── app/                   # Kode aplikasi hasil eksekusi agent
+├── roadmap/ROADMAP.md     # Task dan status pekerjaan
+├── command.py             # CLI utama
+└── README.md
+```
 
 ## Cara Kerja AI dan Roadmap
 
@@ -46,23 +57,22 @@ python command.py evaluate
 
 Evaluator menulis `app/evaluation_report.md` dan `app/improvement_proposal.md`. Evaluator hanya menganalisis file dan membuat proposal; ia tidak mengubah folder `agent/` secara otomatis.
 
-### Contoh Roadmap AI-Building-AI
+### Contoh Roadmap
 
 ```markdown
 # AI-Building-AI Roadmap
 
 ## Fase 1: Fondasi Agent
 
-- [x] Membuat connector LLM awal
-- [x] Membuat generator kode sandbox
-- [x] Membuat validator kode Python
-- [x] Membuat runner pipeline dengan retry
+- [x] Membuat connector LLM
+- [x] Membuat validator kode
+- [x] Membuat pipeline dengan retry
 
 ## Fase 2: Eksekusi Roadmap
 
-- [ ] Membaca task roadmap
-- [ ] Menjalankan task berikutnya
-- [ ] Memvalidasi hasil kode
+- [ ] Membaca task berikutnya
+- [ ] Membuat kode di `app/`
+- [ ] Menjalankan test
 - [ ] Memperbarui status task
 ```
 
@@ -100,26 +110,23 @@ python command.py run
 
 Connector mencoba key secara berurutan. `LLM_API_KEYS` diprioritaskan jika tersedia; jika tidak, connector menggunakan `LLM_API_KEY`. Nilai key tidak pernah dicetak ke log.
 
-### Status Otomatisasi Saat Ini
+### Status Prototype
 
 Yang sudah berjalan otomatis:
 
-- `runner_loop.py` menjalankan connector, validator, dan sandbox secara berurutan.
-- Runner memiliki mekanisme retry jika salah satu proses gagal.
-- `command.py run` membaca task pertama yang belum selesai.
-- Hasil prototype ditulis ke `app/generated_feature.py`.
-- Task ditandai selesai setelah validasi berhasil.
-- `command.py` menyediakan perintah `validate` dan `status`.
-- `command.py evaluate` membuat laporan dan proposal perbaikan agent.
+- `command.py run` membaca task pertama dengan status `[ ]`.
+- Connector mengirim task ke Gemini dan mem-parsing kode hasilnya.
+- Kode divalidasi sebelum ditulis ke `app/`.
+- Task berubah menjadi `[x]` setelah validasi berhasil.
+- `command.py evaluate` membuat report dan proposal perbaikan.
 
 Yang belum berjalan otomatis:
 
-- `agent_generator.py` belum dipanggil oleh runner.
-- `command.py run` baru mengerjakan satu task setiap kali dijalankan.
-- Test aplikasi khusus di folder `tests/` belum dijalankan oleh executor.
-- Evaluator belum menggunakan model LLM untuk analisis semantik.
-- Mode `LLM_API_KEY=test` tersedia untuk pengujian lokal tanpa request ke Gemini.
-- Dengan API key selain `test`, connector mengirim request ke Gemini API.
-- Beberapa key dapat dikonfigurasi melalui `LLM_API_KEYS` untuk rotasi saat quota atau rate limit tercapai.
+- Test aplikasi belum dijalankan oleh executor.
+- Satu kali `run` baru mengerjakan satu task.
+- Agent belum mengubah dirinya sendiri tanpa approval.
+- Commit, pull request, rollback, dan sandbox terisolasi belum tersedia.
 
-Dengan demikian, sistem saat ini sudah memiliki executor roadmap prototype dan connector Gemini. Tahap berikutnya adalah menghubungkan generator, test aplikasi, approval, dan loop otomatis untuk melanjutkan semua task.
+Dengan demikian, sistem ini adalah executor roadmap prototype dengan connector Gemini. Pengembangan self-improvement tetap menggunakan evaluasi, review manusia, test, dan rollback.
+
+Jangan commit API key, file `.env`, atau secret apa pun ke repository.
