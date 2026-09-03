@@ -22,10 +22,10 @@ Inisialisasi project dan masukkan pekerjaan yang ingin dibuat:
 python command.py init
 ```
 
-Contoh input:
+Contoh input untuk repository ini:
 
 ```text
-Membuat aplikasi klinik dengan modul pasien dan dokter
+Membangun AI-Building-AI agar dapat mengeksekusi roadmap secara otomatis
 ```
 
 Perintah tersebut membuat folder `app/`, `tests/`, `agent/`, dan `roadmap/`, lalu menyimpan task awal ke `roadmap/ROADMAP.md`.
@@ -38,17 +38,24 @@ python command.py roadmap
 
 Perintah `init` dan `roadmap` sudah tersedia. Perintah `run`, `validate`, dan `status` merupakan bagian dari pengembangan CLI berikutnya.
 
-### Contoh Roadmap Aplikasi Klinik
+### Contoh Roadmap AI-Building-AI
 
 ```markdown
-# Roadmap Aplikasi Klinik
+# AI-Building-AI Roadmap
 
-- [ ] Buat model data pasien
-- [ ] Buat API pasien
-- [ ] Buat halaman daftar pasien
-- [ ] Tambahkan test pasien
-- [ ] Buat model data dokter
-- [ ] Buat modul jadwal pemeriksaan
+## Fase 1: Fondasi Agent
+
+- [x] Membuat connector LLM awal
+- [x] Membuat generator kode sandbox
+- [x] Membuat validator kode Python
+- [x] Membuat runner pipeline dengan retry
+
+## Fase 2: Eksekusi Roadmap
+
+- [ ] Membaca task roadmap
+- [ ] Menjalankan task berikutnya
+- [ ] Memvalidasi hasil kode
+- [ ] Memperbarui status task
 ```
 
 Pada eksekusi roadmap penuh, AI akan mengambil task pertama yang belum selesai, membuat perubahan kode, menjalankan validator dan test, kemudian mengubah status task menjadi `[x]` hanya jika pemeriksaan berhasil. Jika terjadi error, proses berhenti atau mencoba ulang sesuai konfigurasi dan melaporkan error untuk ditinjau.
